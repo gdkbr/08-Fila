@@ -56,25 +56,6 @@ void menu()
 	}
 }
 
-void inicializar()
-{
-
-	// se a lista já possuir elementos
-	// libera a memoria ocupada
-	NO* aux = inicio;
-	while (aux != NULL) {
-		NO* paraExcluir = aux;
-		aux = aux->prox;
-		free(paraExcluir);
-	}
-
-	inicio = NULL;
-	fim = NULL;
-	cout << "Fila inicializada \n";
-
-}
-
-
 void insere()
 {
 	// aloca memoria dinamicamente para o novo elemento
@@ -83,18 +64,46 @@ void insere()
 	{
 		return;
 	}
-
+	NO* aux = fim;
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
 
 
+	if (aux == NULL) {
+		inicio = novo;
+		fim = novo;
+	}
+	else  {
+		fim-> prox = novo;
+		fim = novo;
+	}
+	
+
 }
 
 void remove()
 {
+	NO* aux = inicio;
+	NO* remover = NULL;
 
+	if (aux != NULL) {
+		if (aux->prox == NULL) {
+			remover = aux;
+			free(remover);
+			inicio = NULL;
+			fim = NULL;
+		}
+		else {
+			remover = aux;
+			inicio = aux->prox;
+			free(remover);
+		}
+	}
+
+	else {
+		cout << "a lista esta vazia.";
+	}
 
 
 }
-
